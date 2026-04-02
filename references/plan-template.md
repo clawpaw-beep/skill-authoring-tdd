@@ -1,74 +1,52 @@
-# Plan 模板参考
+# Plan Template Reference
 
-来源：superpowers/writing-plans，精简自用。
+Source: superpowers/writing-plans, adapted for OpenClaw.
 
-## Plan Header（必须）
+## Plan Header (Required)
 
 ```markdown
-# [功能名] Implementation Plan
+# [Feature Name] Implementation Plan
 
-**Goal:** [一句话描述目标]
-**Architecture:** [2-3 句话方案]
-**Tech Stack:** [关键技术栈]
+**Goal:** One sentence describing the objective
+**Architecture:** 2-3 sentence approach
+**Tech Stack:** Key technologies
 
 ---
 
 ## File Structure
 
-[文件映射]
 - Create: `exact/path/file.py`
 - Modify: `exact/path/file.ts:123-145`
-- Test: `tests/exact/path/test.py`
 ```
 
-## Task 结构
+## Section Guide
 
-```markdown
-### Task N: [组件名]
+### 1. Goal
+- One sentence, no jargon
+- Measurable outcome
 
-**Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py`
+### 2. Architecture
+- High-level design
+- Key decisions and why
 
-- [ ] **Step 1: Write the failing test**
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
-```
+### 3. File Structure
+- Create/Modify/DELETE explicitly
+- Line ranges for modifications
 
-- [ ] **Step 2: Run test to verify it fails**
-`Run: pytest tests/path/test.py::test_name -v`
-`Expected: FAIL with "function not defined"`
+### 4. Implementation Steps
+- Numbered
+- Each step = one atomic commit
+- < 10 steps per plan
 
-- [ ] **Step 3: Write minimal implementation**
-```python
-def function(input):
-    return expected
-```
+### 5. Verification
+- How to test
+- What "done" looks like
 
-- [ ] **Step 4: Run test to verify it passes**
-`Expected: PASS`
+## Common Mistakes
 
-- [ ] **Step 5: Commit**
-```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
-```
-
-## Task 粒度标准
-
-**每个 Step = 2-5 分钟**：
-- "Write the failing test" - 一个 step
-- "Run it to make sure it fails" - 一个 step
-- "Implement the minimal code" - 一个 step
-- "Run tests to verify" - 一个 step
-- "Commit" - 一个 step
-
-## 原则
-
-- **精确文件路径**，不是"相关文件"
-- **完整代码**，不是"添加验证"
-- **精确命令 + 预期输出**
-- **DRY, YAGNI, TDD, frequent commits**
+| Mistake | Fix |
+|---------|-----|
+| Writing code before plan | Delete code, write plan first |
+| Plan too detailed | < 10 steps, each = one commit |
+| Plan too vague | Specific file paths, line numbers |
+| No verification step | Always end with "test and verify" |
